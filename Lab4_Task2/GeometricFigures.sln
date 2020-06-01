@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeometricFigures", "GeometricFigures.vcxproj", "{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Debug|x64.ActiveCfg = Debug|x64
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Debug|x64.Build.0 = Debug|x64
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Debug|x86.ActiveCfg = Debug|Win32
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Debug|x86.Build.0 = Debug|Win32
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Release|x64.ActiveCfg = Release|x64
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Release|x64.Build.0 = Release|x64
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Release|x86.ActiveCfg = Release|Win32
+		{ACEED93E-4FDB-42B5-A859-284EE17A3FAE}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66ECAAB0-891A-4A6F-83E3-4EEB8FB08317}
+	EndGlobalSection
+EndGlobal
