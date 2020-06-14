@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void ClearSpaces(std::string &str)
+void ClearSpaces(std::string& str)
 {
     for (int i = 0; i < str.length(); i++)
     {
@@ -16,7 +16,7 @@ void ClearSpaces(std::string &str)
     }
 }
 
-int DemandNumber(const string &demandMessage, std::string strInt)
+int DemandNumber(const string& demandMessage, std::string strInt)
 {
     while (!(strInt[0] >= '0' && strInt[0] <= '9' || strInt[0] == '-' && strInt[1] >= '0' && strInt[1] <= '9'))
     {
@@ -26,7 +26,7 @@ int DemandNumber(const string &demandMessage, std::string strInt)
     return stoi(strInt);
 }
 
-string GetGearTrouble(CCar &car, int gear)
+string GetGearTrouble(CCar& car, int gear)
 {
     if (car.GetMotionSide() != 0 && gear == -1)
     {
@@ -62,11 +62,11 @@ string GetGearTrouble(CCar &car, int gear)
     }
 }
 
-string GetSpeedTrouble(CCar &car, int speed)
+string GetSpeedTrouble(CCar& car, int speed)
 {
     if (speed < 0)
     {
-    return "Скорость должна быть неотрицательной";
+        return "Скорость должна быть неотрицательной";
     }
     else if ((car.GetCurrentGear() == -1 && (0 > speed || speed > 20)) ||
         (car.GetCurrentGear() == 1 && (0 > speed || speed > 30)) ||
@@ -81,7 +81,7 @@ string GetSpeedTrouble(CCar &car, int speed)
     {
         return "Двигатель машины заглушен";
     }
-    
+
     else if (car.GetCurrentGear() == 0 && car.GetCurrentSpeed() < speed)
     {
         return "На текущей передаче нельзя разгоняться";
@@ -92,6 +92,65 @@ string GetSpeedTrouble(CCar &car, int speed)
     }
 }
 
+void ProcessCommand(std::string& command, CCar& car)
+{
+    if (command == "Info")
+    {
+        cout << "Состояние двигателя - " << (car.IsEngineOn() ? "Включен" : "Выключен") << '\n';
+        cout << "Направление движения - " << ((car.GetMotionSide() == 0) ? "Стоит на месте" : (car.GetMotionSide() > 0) ? "Вперёд" : "Назад") << '\n';
+        cout << "Текущая скорость - " << car.GetCurrentSpeed() << '\n';
+        cout << "Текущая передача - " << car.GetCurrentGear() << '\n';
+    }
+    else if (command == "EngineOn")
+    {
+        cout << (car.TurnOnEngine() ? "Машина успешно заведена" : "Ошибка в попытке завести машину") << '\n';
+    }
+    else if (command == "EngineOff")
+    {
+        cout << (car.TurnOffEngine() ? "Машина успешно затихла" : "Ошибка в попытке заглушить двигатель") << '\n';
+    }
+    else if (command.find("SetGear") == 0)
+    {
+        string strInt = command;
+        strInt.erase(0, 7);
+        ClearSpaces(strInt);
+
+        int gear = DemandNumber("Введите передачу\n", strInt);
+
+        if (car.SetGear(gear))
+        {
+            cout << "Передача успешно изменена на " << gear << '\n';
+        }
+        else
+        {
+            cout << "Ошибка в попытке изменить передачу\n";
+            cout << GetGearTrouble(car, gear) << endl;
+        }
+    }
+    else if (command.find("SetSpeed") == 0)
+    {
+        string strInt = command;
+        strInt.erase(0, 8);
+        ClearSpaces(strInt);
+
+        int speed = DemandNumber("Введите скорость\n", strInt);
+
+        if (car.SetSpeed(speed))
+        {
+            cout << "Скорость успешно изменена на " << speed << '\n';
+        }
+        else
+        {
+            cout << "Ошибка в попытке изменить скорость\n";
+            cout << GetSpeedTrouble(car, speed) << endl;
+        }
+    }
+    else
+    {
+        cout << "Команда не распознана\n";
+    }
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -99,60 +158,6 @@ int main()
     std::string command;
     while (std::getline(std::cin, command))
     {
-        if (command == "Info")
-        {
-            cout << "Состояние двигателя - " << (car.IsEngineOn() ? "Включен" : "Выключен") << '\n';
-            cout << "Направление движения - " << ((car.GetMotionSide() == 0) ? "Стоит на месте" : (car.GetMotionSide() > 0) ? "Вперёд" : "Назад") << '\n';
-            cout << "Текущая скорость - " << car.GetCurrentSpeed() << '\n';
-            cout << "Текущая передача - " << car.GetCurrentGear() << '\n';
-        }
-        else if (command == "EngineOn")
-        {
-            cout << (car.TurnOnEngine() ? "Машина успешно заведена" : "Ошибка в попытке завести машину") << '\n';
-        }
-        else if (command == "EngineOff")
-        {
-            cout << (car.TurnOffEngine() ? "Машина успешно затихла" : "Ошибка в попытке заглушить двигатель") << '\n';
-        }
-        else if (command.find("SetGear") == 0)
-        {
-            string strInt = command;
-            strInt.erase(0, 7);
-            ClearSpaces(strInt);
-
-            int gear = DemandNumber("Введите передачу\n", strInt);
-
-            if (car.SetGear(gear))
-            {
-                cout << "Передача успешно изменена на " << gear << '\n';
-            }
-            else
-            {
-                cout << "Ошибка в попытке изменить передачу\n";
-                cout << GetGearTrouble(car, gear) << endl;
-            }
-        }
-        else if (command.find("SetSpeed") == 0)
-        {
-            string strInt = command;
-            strInt.erase(0, 8);
-            ClearSpaces(strInt);
-            
-            int speed = DemandNumber("Введите скорость\n", strInt);
-
-            if (car.SetSpeed(speed))
-            {
-                cout << "Скорость успешно изменена на " << speed << '\n';
-            }
-            else
-            {
-                cout << "Ошибка в попытке изменить скорость\n";
-                cout << GetSpeedTrouble(car, speed) << endl;
-            }
-        }
-        else
-        {
-            cout << "Команда не распознана\n";
-        }
+        ProcessCommand(command, car);
     }
 }

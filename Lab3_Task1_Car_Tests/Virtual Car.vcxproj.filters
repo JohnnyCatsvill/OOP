@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Virtual Car.cpp">
+    <ClCompile Include="tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Car\CCar.cpp">
+    <ClCompile Include="..\Lab3_Task1_Car_Program\CCar.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Car\CCar.h">
+    <ClInclude Include="..\Lab3_Task1_Car_Program\CCar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
