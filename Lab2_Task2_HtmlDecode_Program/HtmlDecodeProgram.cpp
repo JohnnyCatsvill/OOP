@@ -1,60 +1,72 @@
-﻿
-#include <iostream>
-#include <string>
-
-using namespace std;
-
-char TranslateSpecialSymbol(const string& specialSymbol)
-{
-    if (specialSymbol == "quot")
-    {
-        return '"';
-    }
-    else if (specialSymbol == "apos")
-    {
-        return '\'';
-    }
-    else if (specialSymbol == "lt")
-    {
-        return '<';
-    }
-    else if (specialSymbol == "gt")
-    {
-        return '>';
-    }
-    else if (specialSymbol == "amp")
-    {
-        return '&';
-    }
-    else
-    {
-        return 'n';
-    }
-}
+﻿#include "HtmlDecodeProgramm.h"
 
 const int MAX_ENCODED_SYMBOL_LENGTH = 32;
 
-string HtmlDecode(string const& html)
+using namespace std;
+
+int ReadMapFromFile(map<string, char> &mp, string filePos)
+{
+    string str;
+    char ch;
+    ifstream file(filePos);
+    if (file.is_open())
+    {
+        while (!file.eof())
+        {
+            file >> str;
+            file >> ch;
+            mp.insert(pair<string, char>(str, ch));
+        }
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+string HtmlDecode(string html, string symbolsFile)
 {
     string output;
     string encodedSymbol;
     bool inEncodedSymbol = false;
     int symbolLength = 0;
 
+    static map<string, char> symbols;
+
+    if (symbols.empty())
+    {
+        if (ReadMapFromFile(symbols, symbolsFile) == 1)
+        {
+            cout << "Missing map file";
+            exit(1);
+        }
+    }
+
     for (char ch : html)
     {
         if (ch == '&') //Нашли составной символ
         {
+            if (inEncodedSymbol)
+            {
+                output += '&';
+                output += encodedSymbol;
+            }
             inEncodedSymbol = true;
             symbolLength = 0;
             encodedSymbol.clear();
         }
         else if (ch == ';' && inEncodedSymbol) //Вышли из составного символа
         {
-            char translatedSymbol = TranslateSpecialSymbol(encodedSymbol);
-            if (translatedSymbol != 'n')
+            if (symbols.find(encodedSymbol) != symbols.end())
             {
-                output += translatedSymbol;
+                output += symbols[encodedSymbol];
+            }
+            else
+            {
+                output += '&';
+                output += encodedSymbol;
+                output += ';';
             }
             inEncodedSymbol = false;
         }
@@ -65,6 +77,8 @@ string HtmlDecode(string const& html)
             if (symbolLength > MAX_ENCODED_SYMBOL_LENGTH)
             {
                 inEncodedSymbol = false;
+                output += '&';
+                output += encodedSymbol;
             }
         }
         else //Вне составного символа
@@ -72,20 +86,10 @@ string HtmlDecode(string const& html)
             output += ch;
         }
     }
-    return output;
-}
-
-
-#include <iostream>
-
-int main()
-{
-    string input;
-    string output;
-
-    while (getline(cin, input))
+    if (inEncodedSymbol) 
     {
-        output = HtmlDecode(input);
-        cout << output << endl;
+        output += '&';
+        output += encodedSymbol;
     }
+    return output;
 }

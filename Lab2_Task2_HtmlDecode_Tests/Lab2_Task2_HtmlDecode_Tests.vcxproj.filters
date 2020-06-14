@@ -15,16 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HtmlDecode.cpp">
+    <ClCompile Include="tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="tests.cpp">
+    <ClCompile Include="..\Lab2_Task2_HtmlDecode_Program\HtmlDecodeProgram.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HtmlDecode.h">
+    <ClInclude Include="..\Lab2_Task2_HtmlDecode_Program\HtmlDecodeProgramm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Lab2_Task2_HtmlDecode_Program\SymbolsMap.txt" />
   </ItemGroup>
 </Project>
