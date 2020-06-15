@@ -1,34 +1,36 @@
 #include "CTriangle.h"
 
-double CTriangle::GetArea()
+double CTriangle::GetArea()const
 {
-	return abs(0.5 * ((vertex1.x - vertex3.x) * (vertex2.y - vertex3.y) - (vertex1.y - vertex3.y) * (vertex2.x - vertex3.x)));
+	return abs(0.5 * ((m_vertex1.x - m_vertex3.x) * (m_vertex2.y - m_vertex3.y) - (m_vertex1.y - m_vertex3.y) * (m_vertex2.x - m_vertex3.x)));
 }
-double CTriangle::GetPerimeter()
+double CTriangle::GetPerimeter()const
 {
-	return sqrt(pow(vertex1.x - vertex2.x, 2) + pow(vertex1.y - vertex2.y, 2)) +
-		sqrt(pow(vertex2.x - vertex3.x, 2) + pow(vertex2.y - vertex3.y, 2)) +
-		sqrt(pow(vertex1.x - vertex3.x, 2) + pow(vertex1.y - vertex3.y, 2));
+	return std::hypot(m_vertex1.x - m_vertex2.x, m_vertex1.y - m_vertex2.y) +
+		std::hypot(m_vertex2.x - m_vertex3.x, m_vertex2.y - m_vertex3.y) +
+		std::hypot(m_vertex1.x - m_vertex3.x, m_vertex1.y - m_vertex3.y);
 }
-CPoint CTriangle::GetVertex1()
+CPoint CTriangle::GetVertex1()const
 {
-	return vertex1;
+	return m_vertex1;
 }
-CPoint CTriangle::GetVertex2()
+CPoint CTriangle::GetVertex2()const
 {
-	return vertex2;
+	return m_vertex2;
 }
-CPoint CTriangle::GetVertex3()
+CPoint CTriangle::GetVertex3()const
 {
-	return vertex3;
+	return m_vertex3;
 }
-string CTriangle::ToString()
+uint32_t CTriangle::GetFillColor()const
 {
-	stringstream ss;
-	string output;
-
-	ss << "Triangle " << vertex1.GetPoint() << " " << vertex2.GetPoint() << " " << vertex3.GetPoint();
-
-	getline(ss, output);
-	return output;
+	return m_fillColor;
+}
+uint32_t CTriangle::GetOutlineColor()const
+{
+	return m_outlineColor;
+}
+std::string CTriangle::AppendSolidProperties()const
+{
+	return "Triangle vertex1(" + m_vertex1.ToString() + ") vertex2(" + m_vertex2.ToString() + ") vertex3(" + m_vertex3.ToString() + ")";
 }

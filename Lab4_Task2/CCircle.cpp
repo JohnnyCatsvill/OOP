@@ -1,30 +1,34 @@
 #include "CCircle.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
-const double PI = 3.14159265358979323846;
+double CCircle::GetArea()const
+{
+	return M_PI * pow(m_radius, 2);
+}
+double CCircle::GetPerimeter()const
+{
+	return 2 * M_PI * m_radius;
+}
+CPoint CCircle::GetCenter()const
+{
+	return m_center;
+}
+double CCircle::GetRadius()const
+{
+	return m_radius;
+}
 
-double CCircle::GetArea()
+uint32_t CCircle::GetFillColor()const
 {
-	return PI * pow(radius, 2);
+	return m_fillColor;
 }
-double CCircle::GetPerimeter()
+uint32_t CCircle::GetOutlineColor()const
 {
-	return 2 * PI * radius;
+	return m_outlineColor;
 }
-CPoint CCircle::GetCenter()
-{
-	return center;
-}
-double CCircle::GetRadius()
-{
-	return radius;
-}
-string CCircle::ToString()
-{
-	stringstream ss;
-	string output;
 
-	ss << "Circle " << center.GetPoint() << " " << to_string(radius);
-
-	getline(ss, output);
-	return output;
+std::string CCircle::AppendSolidProperties()const
+{
+	return "Circle center(" + m_center.ToString() + ") radius(" + std::to_string(m_radius) + ")";
 }

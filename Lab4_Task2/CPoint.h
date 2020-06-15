@@ -10,7 +10,9 @@ public:
 		this->y = y;
 	}
 
-	std::string GetPoint();
+	~CPoint() {}
+
+	std::string ToString()const;
 
 	double x;
 	double y;

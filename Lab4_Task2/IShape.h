@@ -4,23 +4,18 @@
 #include "CPoint.h"
 #include "NumeralSystem.h"
 #include <sstream>
-using namespace std;
 
 class IShape
 {
-protected:
-	uint32_t outlineColor;
-
-	IShape(uint32_t outlineColor)
-	{
-		this->outlineColor = outlineColor;
-	}
+public:
 	virtual ~IShape() {};
 
-public:
-	virtual double GetArea();
-	virtual double GetPerimeter();
-	virtual string ToString();
-	uint32_t GetOutlineColor();
+	virtual double GetArea()const;
+	virtual double GetPerimeter()const;
+	virtual uint32_t GetOutlineColor()const;
+	virtual std::string ToString()const;
+
+private:
+	virtual std::string AppendProperties()const;
 };
 

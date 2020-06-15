@@ -1,19 +1,28 @@
 #include "ISolidShape.h"
+using namespace std;
 
-uint32_t ISolidShape::GetFillColor()
-{
-	return fillColor;
-}
-
-double ISolidShape::GetArea()
+uint32_t ISolidShape::GetFillColor()const
 {
 	return 0;
 }
-double ISolidShape::GetPerimeter()
+uint32_t ISolidShape::GetOutlineColor()const
 {
 	return 0;
 }
-string ISolidShape::ToString()
+
+double ISolidShape::GetArea()const
 {
-	return "advancedShape";
+	return 0;
+}
+double ISolidShape::GetPerimeter()const
+{
+	return 0;
+}
+string ISolidShape::AppendSolidProperties()const
+{
+	return "";
+}
+string ISolidShape::AppendProperties()const
+{
+	return AppendSolidProperties() + " fillColor(" + Dec2Hex(GetFillColor()) + ")";
 }

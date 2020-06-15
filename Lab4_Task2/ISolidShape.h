@@ -1,24 +1,19 @@
 #pragma once
 
 #include "IShape.h"
-using namespace std;
 
 class ISolidShape : public IShape
 {
-protected:
-	uint32_t fillColor;
-
-	ISolidShape(uint32_t outlineColor,	uint32_t fillColor) : IShape(outlineColor)
-	{
-		this->fillColor = fillColor;
-	}
-
+public:
 	virtual ~ISolidShape() {};
 
-public:
-	virtual double GetArea();
-	virtual double GetPerimeter();
-	virtual string ToString();
-	uint32_t GetFillColor();
+	virtual double GetArea()const;
+	virtual double GetPerimeter()const;
+	virtual uint32_t GetOutlineColor()const;
+	virtual uint32_t GetFillColor()const;
+
+private:
+	 virtual std::string AppendProperties()const override;
+	 virtual std::string AppendSolidProperties()const;
 };
 

@@ -10,24 +10,26 @@ public:
 		double radius,
 		uint32_t outlineColor,
 		uint32_t fillColor
-	) : ISolidShape
-	(
-		outlineColor,
-		fillColor
-	)
+	) : ISolidShape()
 	{
-		this->center = center;
-		this->radius = radius;
+		this->m_center = center;
+		this->m_radius = radius;
+		this->m_outlineColor = outlineColor;
+		this->m_fillColor = fillColor;
 	}
 
-	double GetArea();
-	double GetPerimeter();
-	CPoint GetCenter();
-	double GetRadius();
-	string ToString();
+	double GetArea()const;
+	double GetPerimeter()const;
+	CPoint GetCenter()const;
+	double GetRadius()const;
+	uint32_t GetOutlineColor()const;
+	uint32_t GetFillColor()const;
 
 private:
-	CPoint center;
-	double radius;
+	std::string AppendSolidProperties()const override;
+	CPoint m_center;
+	double m_radius;
+	uint32_t m_outlineColor;
+	uint32_t m_fillColor;
 };
 

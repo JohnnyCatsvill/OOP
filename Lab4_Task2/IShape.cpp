@@ -1,19 +1,26 @@
 #include "IShape.h"
+using namespace std;
 
-uint32_t IShape::GetOutlineColor()
-{
-	return outlineColor;
-}
-
-double IShape::GetArea()
+uint32_t IShape::GetOutlineColor()const
 {
 	return 0;
 }
-double IShape::GetPerimeter()
+
+double IShape::GetArea()const
 {
 	return 0;
 }
-string IShape::ToString()
+double IShape::GetPerimeter()const
 {
-	return "basicShape";
+	return 0;
+}
+string IShape::AppendProperties()const
+{
+	return "";
+}
+string IShape::ToString()const
+{
+	stringstream ss;
+	ss << AppendProperties() << " outColor(" << Dec2Hex(GetOutlineColor()) << ") area(" << GetArea() << ") perimeter(" << GetPerimeter() << ")";
+	return ss.str();
 }

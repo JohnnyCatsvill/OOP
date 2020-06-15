@@ -1,36 +1,38 @@
 #include "CRectangle.h"
 
-double CRectangle::GetArea()
+double CRectangle::GetArea()const
 {
-	return abs((rightBottom.x - leftTop.x) * (rightBottom.y - leftTop.y));
+	return abs((m_rightBottom.x - m_leftTop.x) * (m_rightBottom.y - m_leftTop.y));
 }
-double CRectangle::GetPerimeter()
+double CRectangle::GetPerimeter()const
 {
-	return 2 * (abs(rightBottom.x - leftTop.x) + abs(rightBottom.y - leftTop.y));
+	return 2 * (abs(m_rightBottom.x - m_leftTop.x) + abs(m_rightBottom.y - m_leftTop.y));
 }
-CPoint CRectangle::GetLeftTop()
+CPoint CRectangle::GetLeftTop()const
 {
-	return leftTop;
+	return m_leftTop;
 }
-CPoint CRectangle::GetRightBottom()
+CPoint CRectangle::GetRightBottom()const
 {
-	return rightBottom;
+	return m_rightBottom;
 }
-string CRectangle::ToString()
+double CRectangle::GetWidth()const
 {
-	stringstream ss;
-	string output;
-
-	ss << "Rectangle " << leftTop.GetPoint() << " " << rightBottom.GetPoint();
-
-	getline(ss, output);
-	return output;
+	return abs(m_rightBottom.x - m_leftTop.x);
 }
-double CRectangle::GetWidth()
+double CRectangle::GetHeight()const
 {
-	return abs(rightBottom.x - leftTop.x);
+	return abs(m_rightBottom.y - m_leftTop.y);
 }
-double CRectangle::GetHeight()
+uint32_t CRectangle::GetFillColor()const
 {
-	return abs(rightBottom.y - leftTop.y);
+	return m_fillColor;
+}
+uint32_t CRectangle::GetOutlineColor()const
+{
+	return m_outlineColor;
+}
+std::string CRectangle::AppendSolidProperties()const
+{
+	return "Rectangle leftTop(" + m_leftTop.ToString() + ") rightBottom(" + m_rightBottom.ToString() + ")";
 }

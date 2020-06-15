@@ -1,144 +1,108 @@
+#define CATCH_CONFIG_MAIN 
 #include "catch2/catch.hpp"
-#include "GeometricFiguresTest.h"
+#include "../Lab4_Task2/CGeometricFigures.h"
 #include <iostream>
+
+using namespace std;
 
 TEST_CASE("RectangleCreationTest")
 {
-	ShapeType figures;
-	vector<string> data;
-	split("rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa", ' ', data);
-	ReadRectangle(data, figures);
+	CGeometricFigures figures;
+	stringstream in;
+	stringstream actual;
+	stringstream expected;
+	in << "rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa";
+	expected << "Rectangle leftTop(10.300000/20.150000) rightBottom(41.000000/60.550000) fillColor(ffaa) outColor(ff0000) area(1240.28) perimeter(142.2)";
 
-	CHECK(figures[0]->GetArea() == 30.7 * 40.4);
-	CHECK(figures[0]->GetPerimeter() == 2 * (30.7 + 40.4));
-	CHECK(figures[0]->GetOutlineColor() == 0xff0000);
-	CHECK(figures[0]->ToString() == "Rectangle 10.300000/20.150000 41.000000/60.550000");
+	figures.ReadFigure(in);
+	figures.GiveShapeInfo(figures.Begin(), actual);
 
-	ISolidShape* solidFigure = dynamic_cast<ISolidShape*>(figures[0]);
-	CHECK(solidFigure->GetFillColor() == 0x00ffaa);
-
-	CRectangle* realFigure = dynamic_cast<CRectangle*>(solidFigure);
-	CHECK(realFigure->GetHeight() == 40.4);
-	CHECK(realFigure->GetWidth() == 30.7);
-	CHECK(realFigure->GetLeftTop().x == 10.3);
-	CHECK(realFigure->GetLeftTop().y == 20.15);
-	CHECK(realFigure->GetRightBottom().x == 41.0);
-	CHECK(realFigure->GetRightBottom().y == 60.55);
+	CHECK(expected.str() == actual.str());
 }
 
-TEST_CASE("TirangleCreationTest")
+TEST_CASE("TriangleCreationTest")
 {
-	ShapeType figures;
-	vector<string> data;
-	split("triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa", ' ', data);
-	ReadTriangle(data, figures);
+	CGeometricFigures figures;
+	stringstream in;
+	stringstream actual;
+	stringstream expected;
+	in << "triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa";
+	expected << "Triangle vertex1(10.300000/20.150000) vertex2(30.700000/40.400000) vertex3(10.300000/40.400000) fillColor(ffaa) outColor(ff0000) area(206.55) perimeter(69.3941)";
 
-	CHECK(figures[0]->GetArea() == abs(0.5 * ((10.3 - 10.3) * (40.4 - 40.4) - (20.15 - 40.4) * (30.7 - 10.3))));
-	CHECK(figures[0]->GetPerimeter() == 
-		sqrt(pow(10.3 - 30.7, 2) + pow(20.15 - 40.4, 2)) +
-		sqrt(pow(30.7 - 10.3, 2) + pow(40.4 - 40.4, 2)) +
-		sqrt(pow(10.3 - 10.3, 2) + pow(20.15 - 40.4, 2)));
-	CHECK(figures[0]->GetOutlineColor() == 0xff0000);
-	CHECK(figures[0]->ToString() == "Triangle 10.300000/20.150000 30.700000/40.400000 10.300000/40.400000");
+	figures.ReadFigure(in);
+	figures.GiveShapeInfo(figures.Begin(), actual);
 
-	ISolidShape* solidFigure = dynamic_cast<ISolidShape*>(figures[0]);
-	CHECK(solidFigure->GetFillColor() == 0x00ffaa);
-
-	CTriangle* realFigure = dynamic_cast<CTriangle*>(solidFigure);
-	CHECK(realFigure->GetVertex1().x == 10.3);
-	CHECK(realFigure->GetVertex1().y == 20.15);
-	CHECK(realFigure->GetVertex2().x == 30.7);
-	CHECK(realFigure->GetVertex2().y == 40.4);
-	CHECK(realFigure->GetVertex3().x == 10.3);
-	CHECK(realFigure->GetVertex3().y == 40.4);
-}
-
-TEST_CASE("CircleCreationTest")
-{
-	ShapeType figures;
-	vector<string> data;
-	split("circle 10.3 20.15 10 ff0000 00ffaa", ' ', data);
-	ReadCircle(data, figures);
-
-	CHECK(figures[0]->GetArea() == 3.14159265358979323846 * pow(10, 2));
-	CHECK(figures[0]->GetPerimeter() == 2 * 3.14159265358979323846 * 10);
-	CHECK(figures[0]->GetOutlineColor() == 0xff0000);
-	CHECK(figures[0]->ToString() == "Circle 10.300000/20.150000 10.000000");
-
-	ISolidShape* solidFigure = dynamic_cast<ISolidShape*>(figures[0]);
-	CHECK(solidFigure->GetFillColor() == 0x00ffaa);
-
-	CCircle* realFigure = dynamic_cast<CCircle*>(solidFigure);
-	CHECK(realFigure->GetCenter().x == 10.3);
-	CHECK(realFigure->GetCenter().y == 20.15);
-	CHECK(realFigure->GetRadius() == 10);
+	CHECK(expected.str() == actual.str());
 }
 
 TEST_CASE("LineCreationTest")
 {
-	ShapeType figures;
-	vector<string> data;
-	split("line 10.3 20.15 30.7 40.4 ff00aa", ' ', data);
-	ReadLine(data, figures);
+	CGeometricFigures figures;
+	stringstream in;
+	stringstream actual;
+	stringstream expected;
+	in << "line 10.3 20.15 30.7 40.4 ff00aa";
+	expected << "Line start(10.300000/20.150000) end(30.700000/40.400000) outColor(ff00aa) area(0) perimeter(28.7441)";
 
-	CHECK(figures[0]->GetArea() == sqrt(pow(30.7 - 10.3, 2) + pow(40.4 - 20.15, 2)));
-	CHECK(figures[0]->GetPerimeter() == 2 * sqrt(pow(30.7 - 10.3, 2) + pow(40.4 - 20.15, 2)));
-	CHECK(figures[0]->GetOutlineColor() == 0xff00aa);
-	CHECK(figures[0]->ToString() == "Line 10.300000/20.150000 30.700000/40.400000");
+	figures.ReadFigure(in);
+	figures.GiveShapeInfo(figures.Begin(), actual);
 
-	CLineSegment* realFigure = dynamic_cast<CLineSegment*>(figures[0]);
-	CHECK(realFigure->GetStartPoint().x == 10.3);
-	CHECK(realFigure->GetStartPoint().y == 20.15);
-	CHECK(realFigure->GetEndPoint().x == 30.7);
-	CHECK(realFigure->GetEndPoint().y == 40.4);
+	CHECK(expected.str() == actual.str());
 }
+TEST_CASE("CircleCreationTest")
+{
+	CGeometricFigures figures;
+	stringstream in;
+	stringstream actual;
+	stringstream expected;
+	in << "circle 10.3 20.15 10 ff0000 00ffaa";
+	expected << "Circle center(10.300000/20.150000) radius(10.000000) fillColor(ffaa) outColor(ff0000) area(314.159) perimeter(62.8319)";
+
+	figures.ReadFigure(in);
+	figures.GiveShapeInfo(figures.Begin(), actual);
+
+	CHECK(expected.str() == actual.str());
+}
+
 
 TEST_CASE("FindFigureWithBiggestArea")
 {
-	ShapeType figures;
-	vector<string> data;
-	split("line 10.3 20.15 30.7 40.4 ff00aa", ' ', data);
-	ReadLine(data, figures);
+	CGeometricFigures figures;
+	stringstream in;
+	in << "line 10.3 20.15 30.7 40.4 ff00aa\n"
+		<< "rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa\n"
+		<< "triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa\n"
+		<< "circle 10.3 20.15 10 ff0000 00ffaa\n";
+	for (int i = 0; i < 4; i++)
+	{
+		figures.ReadFigure(in);
+	}
 
-	CHECK(BiggestAreaIndex(figures) == 0);
+	stringstream expected;
+	stringstream actual;
+	expected << "Rectangle leftTop(10.300000/20.150000) rightBottom(41.000000/60.550000) fillColor(ffaa) outColor(ff0000) area(1240.28) perimeter(142.2)";
+	figures.GiveShapeInfo(figures.BiggestAreaFigure(), actual);
 
-	split("rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa", ' ', data);
-	ReadRectangle(data, figures);
-
-	CHECK(BiggestAreaIndex(figures) == 1);
-
-	split("triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa", ' ', data);
-	ReadTriangle(data, figures);
-
-	CHECK(BiggestAreaIndex(figures) == 1);
-
-	split("circle 10.3 20.15 10 ff0000 00ffaa", ' ', data);
-	ReadCircle(data, figures);
-
-	CHECK(BiggestAreaIndex(figures) == 3);
+	CHECK(expected.str() == actual.str());
 }
 
 TEST_CASE("FindFigureWithSmallestPerimeter")
 {
-	ShapeType figures;
-	vector<string> data;
-	split("rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa", ' ', data);
-	ReadRectangle(data, figures);
+	CGeometricFigures figures;
+	stringstream in;
+	in << "line 10.3 20.15 30.7 40.4 ff00aa\n"
+		<< "rectangle 10.3 20.15 30.7 40.4 ff0000 00ffaa\n"
+		<< "triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa\n"
+		<< "circle 10.3 20.15 10 ff0000 00ffaa\n";
+	for (int i = 0; i < 4; i++)
+	{
+		figures.ReadFigure(in);
+	}
 
-	CHECK(SmallestPerimeterIndex(figures) == 0);
+	stringstream expected;
+	stringstream actual;
+	expected << "Line start(10.300000/20.150000) end(30.700000/40.400000) outColor(ff00aa) area(0) perimeter(28.7441)";
+	figures.GiveShapeInfo(figures.SmallestPerimeterFigure(), actual);
 
-	split("triangle 10.3 20.15 30.7 40.4 10.3 40.4 ff0000 00ffaa", ' ', data);
-	ReadTriangle(data, figures);
-
-	CHECK(SmallestPerimeterIndex(figures) == 1);
-
-	split("line 10.3 20.15 30.7 40.4 ff00aa", ' ', data);
-	ReadLine(data, figures);
-
-	CHECK(SmallestPerimeterIndex(figures) == 2);
-
-	split("circle 10.3 20.15 10 ff0000 00ffaa", ' ', data);
-	ReadCircle(data, figures);
-
-	CHECK(SmallestPerimeterIndex(figures) == 2);
+	CHECK(expected.str() == actual.str());
 }

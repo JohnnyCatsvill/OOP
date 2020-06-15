@@ -152,24 +152,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCircle.cpp" />
+    <ClCompile Include="CGeometricFigures.cpp" />
     <ClCompile Include="CLineSegment.cpp" />
     <ClCompile Include="CPoint.cpp" />
     <ClCompile Include="CRectangle.cpp" />
     <ClCompile Include="CTriangle.cpp" />
-    <ClCompile Include="NumeralSystem.cpp" />
-    <ClCompile Include="GeometricFigures.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="IShape.cpp" />
     <ClCompile Include="ISolidShape.cpp" />
+    <ClCompile Include="NumeralSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCircle.h" />
+    <ClInclude Include="CGeometricFigures.h" />
     <ClInclude Include="CLineSegment.h" />
     <ClInclude Include="CPoint.h" />
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="CTriangle.h" />
-    <ClInclude Include="NumeralSystem.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="ISolidShape.h" />
+    <ClInclude Include="NumeralSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

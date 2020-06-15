@@ -155,27 +155,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CCircle.cpp" />
-    <ClCompile Include="CLineSegment.cpp" />
-    <ClCompile Include="CPoint.cpp" />
-    <ClCompile Include="CRectangle.cpp" />
-    <ClCompile Include="CTriangle.cpp" />
-    <ClCompile Include="GeometricFiguresTest.cpp" />
-    <ClCompile Include="IShape.cpp" />
-    <ClCompile Include="ISolidShape.cpp" />
-    <ClCompile Include="NumeralSystem.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CCircle.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CGeometricFigures.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CLineSegment.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CPoint.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CRectangle.cpp" />
+    <ClCompile Include="..\Lab4_Task2\CTriangle.cpp" />
+    <ClCompile Include="..\Lab4_Task2\IShape.cpp" />
+    <ClCompile Include="..\Lab4_Task2\ISolidShape.cpp" />
+    <ClCompile Include="..\Lab4_Task2\NumeralSystem.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CCircle.h" />
-    <ClInclude Include="CLineSegment.h" />
-    <ClInclude Include="CPoint.h" />
-    <ClInclude Include="CRectangle.h" />
-    <ClInclude Include="CTriangle.h" />
-    <ClInclude Include="GeometricFiguresTest.h" />
-    <ClInclude Include="IShape.h" />
-    <ClInclude Include="ISolidShape.h" />
-    <ClInclude Include="NumeralSystem.h" />
+    <ClInclude Include="..\Lab4_Task2\CCircle.h" />
+    <ClInclude Include="..\Lab4_Task2\CGeometricFigures.h" />
+    <ClInclude Include="..\Lab4_Task2\CLineSegment.h" />
+    <ClInclude Include="..\Lab4_Task2\CPoint.h" />
+    <ClInclude Include="..\Lab4_Task2\CRectangle.h" />
+    <ClInclude Include="..\Lab4_Task2\CTriangle.h" />
+    <ClInclude Include="..\Lab4_Task2\IShape.h" />
+    <ClInclude Include="..\Lab4_Task2\ISolidShape.h" />
+    <ClInclude Include="..\Lab4_Task2\NumeralSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
