@@ -4,19 +4,20 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <corecrt_math_defines.h>
 
 class CComplex
 {
 private:
-	double real;
-	double image;
+	double m_real;
+	double m_image;
 
 public:
 	// инициализация комплексного числа значениями действительной и мнимой частей
 	CComplex(double real = 0, double image = 0) 
 	{
-		this->real = real;
-		this->image = image;
+		this->m_real = real;
+		this->m_image = image;
 	}
 	// возвращает действительную часть комплексного числа
 	double Re()const;

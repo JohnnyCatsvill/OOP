@@ -1,5 +1,6 @@
 
 #define _USE_MATH_DEFINES
+#define CATCH_CONFIG_MAIN 
 #include "catch2/catch.hpp"
 #include "CComplex.h"
 #include <cmath>
@@ -227,8 +228,8 @@ TEST_CASE("CComplexTesting'>>'")
 	CComplex complexNumber3;
 	CComplex complexNumber4;
 	CComplex complexNumber5;
-	string input = "-2+5i\n0-3i\n5\n0\n5+3\n";
-	stringstream ss(input);
+	stringstream ss;
+	ss << "-2+5i\n0-3i\n5\n0\n5+3\n";
 
 	ss >> complexNumber1;
 	ss >> complexNumber2;
@@ -250,18 +251,15 @@ TEST_CASE("CComplexTesting'<<'")
 	CComplex complexNumber3 = CComplex(5, 0);
 	CComplex complexNumber4 = CComplex(0, 0);
 	string expected = "-2+5i|0-3i|5+0i|0+0i";
-	stringstream ss;
+	stringstream actual;
 
-	ss << complexNumber1;
-	ss << '|';
-	ss << complexNumber2;
-	ss << '|';
-	ss << complexNumber3;
-	ss << '|';
-	ss << complexNumber4;
-	
-	string actual;
-	ss >> actual;
+	actual << complexNumber1;
+	actual << '|';
+	actual << complexNumber2;
+	actual << '|';
+	actual << complexNumber3;
+	actual << '|';
+	actual << complexNumber4;
 
-	CHECK(expected == actual);
+	CHECK(expected == actual.str());
 }
