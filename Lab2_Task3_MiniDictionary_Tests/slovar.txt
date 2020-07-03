@@ -1,0 +1,9 @@
+apple=€блоко
+ball=м€ч
+banana=банан
+cat=кот, кошка
+lemon=лимон
+meat=м€со
+orange=апельсин
+pear=груша
+the red square= расна€ ѕлощадь
